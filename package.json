@@ -1,0 +1,32 @@
+{
+  "name": "2228_cartier",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sync": "aws s3 sync --delete ./build/ s3://hashsnap-static/kiosk-editor/%npm_package_name%/",
+    "build": "esbuild src/index.ts --minify --pure:console.log --bundle --outfile=build/dist/out.js && cp index.html build/",
+    "start": "esbuild src/index.ts --sourcemap --bundle --watch --outfile=dist/out.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/dom-mediacapture-record": "^1.0.10",
+    "@types/node": "^16.6.1",
+    "@types/qs": "^6.9.7",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "esbuild": "^0.12.20"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "nanoid": "^3.1.25",
+    "process": "^0.11.10",
+    "qs": "^6.10.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

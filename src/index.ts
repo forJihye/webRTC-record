@@ -19,7 +19,7 @@ async function webcamLoaded() {
   if (devices.length > 1) console.warn('To many groups!', devices);
   const group = devices[0];
   const videoDevice = group?.devices.find(({ kind }) => kind === 'videoinput');
-
+  // console.log(devices, videoDevice)
   if (videoDevice) {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
@@ -65,7 +65,7 @@ const raf = new class Raf extends Set<Function> {
   }
 }
 
-const WEBCAM_NAME = 'C922';
+const WEBCAM_NAME = 'PLEOMAX' //'C922';
 const main = async () => {try {
   await webcamLoaded();
   
@@ -83,23 +83,20 @@ const main = async () => {try {
   
   const imageStore: Blob[] = [];
 
-  const startBtn = document.getElementById('start') as HTMLButtonElement;
-  const stopBtn = document.getElementById('stop') as HTMLButtonElement;
+  // const startBtn = document.getElementById('start') as HTMLButtonElement;
+  // const stopBtn = document.getElementById('stop') as HTMLButtonElement;
   const recordBtn = document.getElementById('record') as HTMLButtonElement;
   const recordStop = document.getElementById('record-stop') as HTMLButtonElement;
   const playButton = document.getElementById('play') as HTMLButtonElement;
   const resultVideo = document.getElementById("video") as HTMLVideoElement;
 
-  startBtn.onclick = async () => {
-  }
-  
+  // startBtn.onclick = async () => { }
   // stopBtn.onclick = () => { }
   
   let mediaRecorder: MediaRecorder;
   const recordedBlobs: Blob[] = [];
   recordBtn.onclick = async () => {
     mediaRecorder = new MediaRecorder(stream, {mimeType: 'video/webm'});
-    
     mediaRecorder.ondataavailable = ({data}) => recordedBlobs.push(data);
     mediaRecorder.start();
   }
